@@ -1,0 +1,52 @@
+<div class="anki-container">
+  <h2 *ngIf="quizMode">Mode Quiz</h2>
+  <h2 *ngIf="!quizMode">Anki Cards</h2>
+
+  <!-- Mode Quiz -->
+  <div *ngIf="quizMode && currentCard" class="quiz-card">
+    <p class="quiz-question">
+      <strong *ngIf="!showAnswer">Q:</strong>
+      <strong *ngIf="showAnswer">A:</strong>
+      {{ showAnswer ? currentCard.answer : currentCard.question }}
+    </p>
+
+    <div *ngIf="!showAnswer">
+      <button class="reveal-btn" (click)="revealAnswer()">👁️ Voir la réponse</button>
+    </div>
+
+    <div *ngIf="showAnswer" class="answer-buttons">
+      <p>Tu avais juste ?</p>
+      <button class="correct-btn" (click)="answer(true)">✅ Oui</button>
+      <button class="wrong-btn" (click)="answer(false)">❌ Non</button>
+    </div>
+
+    <div class="score">
+      Score : {{ score }} / {{ totalAnswered }}
+    </div>
+  </div>
+
+  <!-- Bouton pour basculer -->
+  <button class="toggle-btn" (click)="quizMode = !quizMode">
+    {{ quizMode ? '⬅️ Revenir à la liste' : '🎮 Passer en mode Quiz' }}
+  </button>
+
+  <!-- Mode Liste -->
+  <div *ngIf="!quizMode">
+    <div class="card-list">
+      <div *ngFor="let card of cards" class="card">
+        <div class="card-body">
+          <p class="question"><strong>Q:</strong> {{ card.question }}</p>
+          <p class="answer"><strong>A:</strong> {{ card.answer }}</p>
+        </div>
+        <button class="delete-btn" (click)="deleteCard(card.id)">🗑️ Supprimer</button>
+      </div>
+    </div>
+
+    <div class="add-card">
+      <h3>Ajouter une nouvelle carte</h3>
+      <input [(ngModel)]="newQuestion" placeholder="Question">
+      <input [(ngModel)]="newAnswer" placeholder="Réponse">
+      <button (click)="addCard()">➕ Ajouter</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "cards": [
+    {
+      "id": "1",
+      "question": "Capital de la France ?",
+      "answer": "Paris"
+    },
+    {
+      "id": "431a",
+      "question": "Comment s'appelle le roi d'Espagne ?",
+      "answer": "Philippe"
+    }
+  ]
+}
